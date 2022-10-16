@@ -6,7 +6,7 @@ import Card from "./Card";
 
 const ErrorModal = (props) => {
   return (
-    <div>
+    <>
       <div className={classes.backdrop} onClick={props.onConfirm}></div>
       <Card className={classes.modal}>
         <header className={classes.header}>
@@ -21,7 +21,7 @@ const ErrorModal = (props) => {
           </Button>
         </footer>
       </Card>
-    </div>
+    </>
   );
 };
 
