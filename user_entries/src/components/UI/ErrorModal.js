@@ -1,13 +1,16 @@
 import React from "react";
+import ReactDOM from "react-dom";
 
 import classes from "./ErrorModal.module.css";
 import Button from "./Button";
 import Card from "./Card";
 
-const ErrorModal = (props) => {
+const Backdrop = props => {
+  return (<div className={classes.backdrop} onClick={props.onConfirm}></div>)
+}
+
+const Modal = props => {
   return (
-    <>
-      <div className={classes.backdrop} onClick={props.onConfirm}></div>
       <Card className={classes.modal}>
         <header className={classes.header}>
           <h2>{props.error.title}</h2>
@@ -21,6 +24,14 @@ const ErrorModal = (props) => {
           </Button>
         </footer>
       </Card>
+  )
+}
+
+const ErrorModal = (props) => {
+  return (
+    <>
+      {ReactDOM.createPortal(<Backdrop onConfirm={props.onConfirm}/>, document.getElementById('backdrop-root'))}
+      {ReactDOM.createPortal(<Modal error={props.error} onConfirm={props.onConfirm}/>, document.getElementById('modal-root'))}
     </>
   );
 };
